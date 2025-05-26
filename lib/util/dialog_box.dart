@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'my_button.dart';
 
 class DialogBox<T extends Object> extends StatelessWidget {
   final TextEditingController controller;
@@ -21,7 +20,7 @@ class DialogBox<T extends Object> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      content: Container(
+      content: SizedBox(
         height: 120,
         child: Column(children: [
           TextField(
@@ -34,18 +33,24 @@ class DialogBox<T extends Object> extends StatelessWidget {
 
           Row(
             children: [
-              MyButton(text: "Save", onPressed: (){
-                final obj = constructor(controller.text);
-                list.add(obj);
-                onPressed();
-                box.add(obj);
-              }),
-              MyButton(text: "Cancel", onPressed: (){
-                Navigator.of(context).pop();
-                controller.clear();
-
-
-              })
+              MaterialButton(
+                  color: Theme.of(context).secondaryHeaderColor,
+                  child: Text("Save"),
+                  onPressed: (){
+                    final obj = constructor(controller.text);
+                    list.add(obj);
+                    onPressed();
+                    box.add(obj);
+                  }
+              ),
+              MaterialButton(
+                  color: Theme.of(context).secondaryHeaderColor,
+                  child: Text("Cancel"),
+                  onPressed: (){
+                    Navigator.of(context).pop();
+                    controller.clear();
+                  }
+              ),
             ],
           )
         ],
