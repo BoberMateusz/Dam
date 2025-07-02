@@ -1,27 +1,46 @@
+
+
+import 'dart:math';
+
+import 'package:dam/main.dart';
 import 'package:dam/util/dialog_box.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:uuid/v4.dart';
 
-import '../util/task.dart';
+import '../models/task/task_model.dart';
+import '../models/task/task_widget.dart';
+import '../repositories/task_repository.dart';
 
 class TasksPage extends StatefulWidget {
-  const TasksPage({super.key});
+  final TaskRepository taskRepository;
+
+  const TasksPage({super.key, required this.taskRepository});
 
   @override
   State<TasksPage> createState() => _TasksPageState();
 }
 
 class _TasksPageState extends State<TasksPage> {
+  late List<Task> tasks;
 
-  final Box<Task> box = Hive.box<Task>('tasks');
-  late List<Task> tasks = box.values.toList();
+  @override
+  void initState() {
+    super.initState();
+    _loadTasks();
+  }
+
+  void _loadTasks() {
+    setState(() {
+      tasks = widget.taskRepository.getAll();
+    });
+  }
+
+
 
   final _controller = TextEditingController();
 
   void resetState() {
     setState(() {
-      tasks;
+      tasks;  //todo: change to taskWidget??
     });
   }
 
@@ -33,12 +52,10 @@ class _TasksPageState extends State<TasksPage> {
             controller: _controller,
             onPressed: resetState,
             list: tasks,
-            box: box,
+            dao: widget.taskRepository,
             constructor: (String text) {
-              return Task(
-                name: text,
-                id: UuidV4().generate(),
-              );},
+              return Task(name: text);
+              },
         );
     },
     );
@@ -46,8 +63,6 @@ class _TasksPageState extends State<TasksPage> {
 
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
@@ -59,7 +74,9 @@ class _TasksPageState extends State<TasksPage> {
       ),
       body: ListView.builder(
         scrollDirection: Axis.vertical,
-        itemBuilder: (context, index) => tasks[index], itemCount: tasks.length,
+        itemBuilder: (context, index) => TaskWidget(task: tasks[index]) , itemCount: tasks.length,
+
+
       )
     );
   }

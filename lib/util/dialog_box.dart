@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+
+import '../repositories/dao.dart';
 
 class DialogBox<T extends Object> extends StatelessWidget {
   final TextEditingController controller;
   final VoidCallback onPressed;
   final List<T> list;
-  final Box<T> box;
+  final DAO<T> dao;
   final T Function(String text) constructor;
   const DialogBox({
     super.key,
     required this.controller,
     required this.onPressed,
-    required this.box,
+    required this.dao,
     required this.constructor,
     required this.list
   });
@@ -40,7 +41,7 @@ class DialogBox<T extends Object> extends StatelessWidget {
                     final obj = constructor(controller.text);
                     list.add(obj);
                     onPressed();
-                    box.add(obj);
+                    dao.add(obj);
                   }
               ),
               MaterialButton(

@@ -1,12 +1,16 @@
-import 'package:dam/pages/tasks_page.dart';
-import 'package:dam/util/task.dart';
+import 'package:dam/database/objectbox.dart';
+import 'package:dam/repositories/task_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/adapters.dart';
+import 'package:dam/pages/tasks_page.dart';
 
-void main() async{
-  await Hive.initFlutter();
-  Hive.registerAdapter(TaskAdapter());
-  await Hive.openBox<Task>('tasks');
+
+late ObjectBox objectbox;
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  objectbox = await ObjectBox.create();
+
 
   runApp(const MyApp());
 }
@@ -22,7 +26,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlue),
       ),
-      home: TasksPage(),
+      home: TasksPage(taskRepository: TaskRepository(objectbox),),
     );
   }
 }
