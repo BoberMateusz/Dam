@@ -8,10 +8,12 @@ import '../../repositories/task_repository.dart';
 class TaskWidget extends StatefulWidget {
 
   Task task;
+  Function(Task task) deleteFromList;
 
   TaskWidget({
     super.key,
-    required this.task
+    required this.task,
+    required this.deleteFromList
   });
 
 
@@ -22,7 +24,7 @@ class TaskWidget extends StatefulWidget {
 class _TaskWidgetState extends State<TaskWidget> {
   static final TaskRepository taskRepository = TaskRepository(objectbox);
 
-  changeState() {
+  toggleCompletion() {
     final bool comp = widget.task.isCompleted;
     setState(() {
       widget.task.isCompleted = !comp;
@@ -32,13 +34,26 @@ class _TaskWidgetState extends State<TaskWidget> {
 
   }
 
+  deleteTask() {
+    taskRepository.delete(widget.task.id);
+    widget.deleteFromList(widget.task);
+    // Consider adding a way to refresh the parent widget's list of tasks here
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
       child: Row(
         children: [
-          Checkbox(value: widget.task.isCompleted, onChanged: (a) => changeState()),
-          Text(widget.task.name)
+          Checkbox(value: widget.task.isCompleted, onChanged: (a) => toggleCompletion()),
+          Expanded(child: Text(widget.task.name)),
+          IconButton(
+            icon: const Icon(Icons.delete),
+            onPressed: deleteTask,
+            tooltip: 'Delete Task',
+          ),
+
+
         ],
       ),
     );

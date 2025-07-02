@@ -1,8 +1,5 @@
 
 
-import 'dart:math';
-
-import 'package:dam/main.dart';
 import 'package:dam/util/dialog_box.dart';
 import 'package:flutter/material.dart';
 
@@ -31,6 +28,12 @@ class _TasksPageState extends State<TasksPage> {
   void _loadTasks() {
     setState(() {
       tasks = widget.taskRepository.getAll();
+    });
+  }
+
+  void deleteTask(Task task) {
+    setState(() {
+      tasks.remove(task);
     });
   }
 
@@ -74,7 +77,7 @@ class _TasksPageState extends State<TasksPage> {
       ),
       body: ListView.builder(
         scrollDirection: Axis.vertical,
-        itemBuilder: (context, index) => TaskWidget(task: tasks[index]) , itemCount: tasks.length,
+        itemBuilder: (context, index) => TaskWidget(task: tasks[index], deleteFromList: deleteTask) , itemCount: tasks.length,
 
 
       )
