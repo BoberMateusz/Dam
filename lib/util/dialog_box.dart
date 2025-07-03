@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../repositories/dao.dart';
 
 class DialogBox<T extends Object> extends StatelessWidget {
   final TextEditingController controller;
-  final VoidCallback onPressed;
-  final List<T> list;
-  final DAO<T> dao;
-  final T Function(String text) constructor;
+  final Function onPressed;
   const DialogBox({
     super.key,
     required this.controller,
     required this.onPressed,
-    required this.dao,
-    required this.constructor,
-    required this.list
   });
 
 
@@ -36,13 +29,11 @@ class DialogBox<T extends Object> extends StatelessWidget {
             children: [
               MaterialButton(
                   color: Theme.of(context).secondaryHeaderColor,
-                  child: Text("Save"),
                   onPressed: (){
-                    final obj = constructor(controller.text);
-                    list.add(obj);
-                    onPressed();
-                    dao.add(obj);
-                  }
+                    String text = controller.text;
+                    onPressed(text);
+                  },
+                  child: Text("Save")
               ),
               MaterialButton(
                   color: Theme.of(context).secondaryHeaderColor,

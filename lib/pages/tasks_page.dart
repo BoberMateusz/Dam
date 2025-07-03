@@ -43,8 +43,15 @@ class _TasksPageState extends State<TasksPage> {
 
   void resetState() {
     setState(() {
-      tasks;  //todo: change to taskWidget??
+      tasks;
     });
+  }
+
+  void creationOnPressed(text) {
+    Task task = Task(name: text);
+    tasks.add(task);
+    resetState();
+    widget.taskRepository.add(task);
   }
 
   void createNewTask() {
@@ -53,12 +60,7 @@ class _TasksPageState extends State<TasksPage> {
         builder: (context) {
           return DialogBox(
             controller: _controller,
-            onPressed: resetState,
-            list: tasks,
-            dao: widget.taskRepository,
-            constructor: (String text) {
-              return Task(name: text);
-              },
+            onPressed: creationOnPressed,
         );
     },
     );

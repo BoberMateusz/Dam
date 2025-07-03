@@ -3,6 +3,7 @@ import 'package:dam/models/task/task_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../repositories/task_repository.dart';
+import '../../util/dialog_box.dart';
 
 
 class TaskWidget extends StatefulWidget {
@@ -24,6 +25,12 @@ class TaskWidget extends StatefulWidget {
 class _TaskWidgetState extends State<TaskWidget> {
   static final TaskRepository taskRepository = TaskRepository(objectbox);
 
+  void resetState() {
+    setState(() {
+      widget.task;
+    });
+  }
+
   toggleCompletion() {
     final bool comp = widget.task.isCompleted;
     setState(() {
@@ -33,11 +40,17 @@ class _TaskWidgetState extends State<TaskWidget> {
     taskRepository.update(widget.task);
 
   }
+  editTask() {
+    final controller = TextEditingController();
+    controller.text = widget.task.name;
+
+    //dialogfs
+    //delete arguments
+  }
 
   deleteTask() {
     taskRepository.delete(widget.task.id);
     widget.deleteFromList(widget.task);
-    // Consider adding a way to refresh the parent widget's list of tasks here
   }
 
   @override
@@ -47,6 +60,11 @@ class _TaskWidgetState extends State<TaskWidget> {
         children: [
           Checkbox(value: widget.task.isCompleted, onChanged: (a) => toggleCompletion()),
           Expanded(child: Text(widget.task.name)),
+          IconButton(
+            icon: const Icon(Icons.edit),
+            onPressed: editTask,
+            tooltip: 'Edit Task',
+          ),
           IconButton(
             icon: const Icon(Icons.delete),
             onPressed: deleteTask,
