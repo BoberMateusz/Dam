@@ -8,10 +8,10 @@ import '../../util/dialog_box.dart';
 
 class TaskWidget extends StatefulWidget {
 
-  Task task;
-  Function(Task task) deleteFromList;
+  final Task task;
+  final Function(Task task) deleteFromList;
 
-  TaskWidget({
+  const TaskWidget({
     super.key,
     required this.task,
     required this.deleteFromList
@@ -40,12 +40,28 @@ class _TaskWidgetState extends State<TaskWidget> {
     taskRepository.update(widget.task);
 
   }
+  editOnPressed(text) {
+    setState(() {
+      widget.task.name = text;
+    });
+    taskRepository.update(widget.task);
+  }
+
+
   editTask() {
     final controller = TextEditingController();
     controller.text = widget.task.name;
 
-    //dialogfs
-    //delete arguments
+    showDialog(
+      context: context,
+      builder: (context) {
+        return DialogBox(
+          controller: controller,
+          onPressed: editOnPressed,
+          hintText: "",
+        );
+      },
+    );
   }
 
   deleteTask() {

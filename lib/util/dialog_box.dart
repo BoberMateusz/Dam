@@ -4,10 +4,13 @@ import 'package:flutter/material.dart';
 class DialogBox<T extends Object> extends StatelessWidget {
   final TextEditingController controller;
   final Function onPressed;
+
+  final String hintText;
   const DialogBox({
     super.key,
     required this.controller,
     required this.onPressed,
+    required this.hintText,
   });
 
 
@@ -21,7 +24,7 @@ class DialogBox<T extends Object> extends StatelessWidget {
             controller: controller,
             decoration: InputDecoration(
                 border: OutlineInputBorder(),
-                hintText: "Add a new task"
+                hintText: hintText
             ),
           ),
 

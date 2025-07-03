@@ -47,7 +47,7 @@ class _TasksPageState extends State<TasksPage> {
     });
   }
 
-  void creationOnPressed(text) {
+  void createOnPressed(text) {
     Task task = Task(name: text);
     tasks.add(task);
     resetState();
@@ -60,7 +60,8 @@ class _TasksPageState extends State<TasksPage> {
         builder: (context) {
           return DialogBox(
             controller: _controller,
-            onPressed: creationOnPressed,
+            onPressed: createOnPressed,
+            hintText: "Create a Task",
         );
     },
     );
