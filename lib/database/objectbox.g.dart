@@ -14,34 +14,71 @@ import 'package:objectbox/internal.dart'
 import 'package:objectbox/objectbox.dart' as obx;
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
+import '../models/category/category_model.dart';
 import '../models/task/task_model.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
 final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
-    id: const obx_int.IdUid(1, 2528939670996978107),
-    name: 'Task',
-    lastPropertyId: const obx_int.IdUid(3, 8360275856993236388),
+    id: const obx_int.IdUid(1, 2189447671490726969),
+    name: 'Category',
+    lastPropertyId: const obx_int.IdUid(2, 1118779711945786860),
     flags: 0,
     properties: <obx_int.ModelProperty>[
       obx_int.ModelProperty(
-        id: const obx_int.IdUid(1, 1583248425932657614),
+        id: const obx_int.IdUid(1, 3856293409112643037),
         name: 'id',
         type: 6,
         flags: 1,
       ),
       obx_int.ModelProperty(
-        id: const obx_int.IdUid(2, 8988288321257497721),
+        id: const obx_int.IdUid(2, 1118779711945786860),
+        name: 'name',
+        type: 9,
+        flags: 0,
+      ),
+    ],
+    relations: <obx_int.ModelRelation>[],
+    backlinks: <obx_int.ModelBacklink>[
+      obx_int.ModelBacklink(
+        name: 'tasks',
+        srcEntity: 'Task',
+        srcField: 'category',
+      ),
+    ],
+  ),
+  obx_int.ModelEntity(
+    id: const obx_int.IdUid(2, 1012309561863622508),
+    name: 'Task',
+    lastPropertyId: const obx_int.IdUid(4, 3127667308169683394),
+    flags: 0,
+    properties: <obx_int.ModelProperty>[
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(1, 4814699461518510483),
+        name: 'id',
+        type: 6,
+        flags: 1,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(2, 448653373904109191),
         name: 'name',
         type: 9,
         flags: 0,
       ),
       obx_int.ModelProperty(
-        id: const obx_int.IdUid(3, 8360275856993236388),
+        id: const obx_int.IdUid(3, 3008513323311580127),
         name: 'isCompleted',
         type: 1,
         flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(4, 3127667308169683394),
+        name: 'categoryId',
+        type: 11,
+        flags: 520,
+        indexId: const obx_int.IdUid(1, 3716094354217942722),
+        relationTarget: 'Category',
       ),
     ],
     relations: <obx_int.ModelRelation>[],
@@ -87,8 +124,8 @@ Future<obx.Store> openStore({
 obx_int.ModelDefinition getObjectBoxModel() {
   final model = obx_int.ModelInfo(
     entities: _entities,
-    lastEntityId: const obx_int.IdUid(1, 2528939670996978107),
-    lastIndexId: const obx_int.IdUid(0, 0),
+    lastEntityId: const obx_int.IdUid(2, 1012309561863622508),
+    lastIndexId: const obx_int.IdUid(1, 3716094354217942722),
     lastRelationId: const obx_int.IdUid(0, 0),
     lastSequenceId: const obx_int.IdUid(0, 0),
     retiredEntityUids: const [],
@@ -101,9 +138,56 @@ obx_int.ModelDefinition getObjectBoxModel() {
   );
 
   final bindings = <Type, obx_int.EntityDefinition>{
-    Task: obx_int.EntityDefinition<Task>(
+    Category: obx_int.EntityDefinition<Category>(
       model: _entities[0],
-      toOneRelations: (Task object) => [],
+      toOneRelations: (Category object) => [],
+      toManyRelations: (Category object) => {
+        obx_int.RelInfo<Task>.toOneBacklink(
+          4,
+          object.id,
+          (Task srcObject) => srcObject.category,
+        ): object.tasks,
+      },
+      getId: (Category object) => object.id,
+      setId: (Category object, int id) {
+        object.id = id;
+      },
+      objectToFB: (Category object, fb.Builder fbb) {
+        final nameOffset = fbb.writeString(object.name);
+        fbb.startTable(3);
+        fbb.addInt64(0, object.id);
+        fbb.addOffset(1, nameOffset);
+        fbb.finish(fbb.endTable());
+        return object.id;
+      },
+      objectFromFB: (obx.Store store, ByteData fbData) {
+        final buffer = fb.BufferContext(fbData);
+        final rootOffset = buffer.derefObject(0);
+        final idParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          4,
+          0,
+        );
+        final nameParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGet(buffer, rootOffset, 6, '');
+        final object = Category(id: idParam, name: nameParam);
+        obx_int.InternalToManyAccess.setRelInfo<Category>(
+          object.tasks,
+          store,
+          obx_int.RelInfo<Task>.toOneBacklink(
+            4,
+            object.id,
+            (Task srcObject) => srcObject.category,
+          ),
+        );
+        return object;
+      },
+    ),
+    Task: obx_int.EntityDefinition<Task>(
+      model: _entities[1],
+      toOneRelations: (Task object) => [object.category],
       toManyRelations: (Task object) => {},
       getId: (Task object) => object.id,
       setId: (Task object, int id) {
@@ -111,10 +195,11 @@ obx_int.ModelDefinition getObjectBoxModel() {
       },
       objectToFB: (Task object, fb.Builder fbb) {
         final nameOffset = fbb.writeString(object.name);
-        fbb.startTable(4);
+        fbb.startTable(5);
         fbb.addInt64(0, object.id);
         fbb.addOffset(1, nameOffset);
         fbb.addBool(2, object.isCompleted);
+        fbb.addInt64(3, object.category.targetId);
         fbb.finish(fbb.endTable());
         return object.id;
       },
@@ -141,7 +226,13 @@ obx_int.ModelDefinition getObjectBoxModel() {
           name: nameParam,
           isCompleted: isCompletedParam,
         );
-
+        object.category.targetId = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          10,
+          0,
+        );
+        object.category.attach(store);
         return object;
       },
     ),
@@ -150,16 +241,37 @@ obx_int.ModelDefinition getObjectBoxModel() {
   return obx_int.ModelDefinition(model, bindings);
 }
 
+/// [Category] entity fields to define ObjectBox queries.
+class Category_ {
+  /// See [Category.id].
+  static final id = obx.QueryIntegerProperty<Category>(
+    _entities[0].properties[0],
+  );
+
+  /// See [Category.name].
+  static final name = obx.QueryStringProperty<Category>(
+    _entities[0].properties[1],
+  );
+
+  /// see [Category.tasks]
+  static final tasks = obx.QueryBacklinkToMany<Task, Category>(Task_.category);
+}
+
 /// [Task] entity fields to define ObjectBox queries.
 class Task_ {
   /// See [Task.id].
-  static final id = obx.QueryIntegerProperty<Task>(_entities[0].properties[0]);
+  static final id = obx.QueryIntegerProperty<Task>(_entities[1].properties[0]);
 
   /// See [Task.name].
-  static final name = obx.QueryStringProperty<Task>(_entities[0].properties[1]);
+  static final name = obx.QueryStringProperty<Task>(_entities[1].properties[1]);
 
   /// See [Task.isCompleted].
   static final isCompleted = obx.QueryBooleanProperty<Task>(
-    _entities[0].properties[2],
+    _entities[1].properties[2],
+  );
+
+  /// See [Task.category].
+  static final category = obx.QueryRelationToOne<Task, Category>(
+    _entities[1].properties[3],
   );
 }

@@ -7,7 +7,6 @@ import '../../util/dialog_box.dart';
 
 
 class TaskWidget extends StatefulWidget {
-
   final Task task;
   final Function(Task task) deleteFromList;
 

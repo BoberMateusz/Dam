@@ -63,7 +63,7 @@ class _TasksPageState extends State<TasksPage> {
             onPressed: createOnPressed,
             hintText: "Create a Task",
         );
-    },
+      },
     );
   }
 

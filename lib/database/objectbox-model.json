@@ -4,32 +4,59 @@
   "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
   "entities": [
     {
-      "id": "1:2528939670996978107",
-      "lastPropertyId": "3:8360275856993236388",
-      "name": "Task",
+      "id": "1:2189447671490726969",
+      "lastPropertyId": "2:1118779711945786860",
+      "name": "Category",
       "properties": [
         {
-          "id": "1:1583248425932657614",
+          "id": "1:3856293409112643037",
           "name": "id",
           "type": 6,
           "flags": 1
         },
         {
-          "id": "2:8988288321257497721",
+          "id": "2:1118779711945786860",
+          "name": "name",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:1012309561863622508",
+      "lastPropertyId": "4:3127667308169683394",
+      "name": "Task",
+      "properties": [
+        {
+          "id": "1:4814699461518510483",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:448653373904109191",
           "name": "name",
           "type": 9
         },
         {
-          "id": "3:8360275856993236388",
+          "id": "3:3008513323311580127",
           "name": "isCompleted",
           "type": 1
+        },
+        {
+          "id": "4:3127667308169683394",
+          "name": "categoryId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "1:3716094354217942722",
+          "relationTarget": "Category"
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "1:2528939670996978107",
-  "lastIndexId": "0:0",
+  "lastEntityId": "2:1012309561863622508",
+  "lastIndexId": "1:3716094354217942722",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
