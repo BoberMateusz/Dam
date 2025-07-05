@@ -36,7 +36,7 @@ class TaskRepository implements DAO<Task> {
 
   @override
   int update(Task task) {
-    return taskBox.put(task); //todo: im unsure if this is correct
+    return taskBox.put(task);
   }
 
   @override

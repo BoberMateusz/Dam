@@ -31,13 +31,10 @@ class _TaskWidgetState extends State<TaskWidget> {
   }
 
   toggleCompletion() {
-    final bool comp = widget.task.isCompleted;
     setState(() {
-      widget.task.isCompleted = !comp;
+      widget.task.isCompleted = !widget.task.isCompleted;
     });
-
     taskRepository.update(widget.task);
-
   }
   editOnPressed(text) {
     setState(() {
@@ -45,7 +42,7 @@ class _TaskWidgetState extends State<TaskWidget> {
     });
     taskRepository.update(widget.task);
   }
-
+//todo: should functions be in widget or model?
 
   editTask() {
     final controller = TextEditingController();

@@ -1,5 +1,6 @@
 
 
+import 'package:dam/models/category/category_controller.dart';
 import 'package:dam/models/category/category_widget.dart';
 import 'package:dam/repositories/category_repository.dart';
 import 'package:dam/util/dialog_box.dart';
@@ -8,38 +9,42 @@ import 'package:flutter/material.dart';
 import '../models/category/category_model.dart';
 
 class TasksPage2 extends StatefulWidget {
-  final CategoryRepository categoryRepository;
+  final CategoryController categoryController;
 
-  const TasksPage2({super.key, required this.categoryRepository});
+  const TasksPage2({
+    super.key,
+    required this.categoryController
+  });
 
   @override
   State<TasksPage2> createState() => _TasksPage2State();
 }
 
 class _TasksPage2State extends State<TasksPage2> {
-  late List<Category> categories;
+    late List<Category> categories = widget.categoryController.categories;
 
-  @override
-  void initState() {
-    super.initState();
-    _loadCategories();
-  }
-
-  void _loadCategories() {
-    setState(() {
-      categories = widget.categoryRepository.getAll();
-    });
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _loadCategories();
+  // }
+  //
+  // void _loadCategories() {
+  //   setState(() {
+  //     categories;
+  //   });
+  // }
 
   void deleteCategory(Category category) {
     setState(() {
       categories.remove(category);
+      //todo: delete cat from db
+      //todo: delete tasks
     });
   }
 
 
 
-  final _controller = TextEditingController();
 
   void resetState() {
     setState(() {
@@ -48,20 +53,15 @@ class _TasksPage2State extends State<TasksPage2> {
   }
 
 
-  void createCategoryOnPressed(text) {
-    Category category = Category(name: text);
-    categories.add(category);
-    resetState();
-    widget.categoryRepository.add(category);
-  }
+
 
   void createNewCategory() {
     showDialog(
       context: context,
       builder: (context) {
         return DialogBox(
-          controller: _controller,
-          onPressed: createCategoryOnPressed,
+          controller: TextEditingController(),
+          onPressed: widget.categoryController.createCategoryOnPressed, //todo:change to list, add resetState
           hintText: "Create a Category",
         );
       },
@@ -81,7 +81,7 @@ class _TasksPage2State extends State<TasksPage2> {
         ),
         body: ListView.builder(
           scrollDirection: Axis.vertical,
-          itemBuilder: (context, index) => CategoryWidget(category: categories[index]) , itemCount: categories.length,
+          itemBuilder: (context, index) => CategoryWidget(category: categories[index], categoryController: widget.categoryController) , itemCount: categories.length,
 
 
         )

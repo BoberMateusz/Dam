@@ -5,6 +5,8 @@ import 'package:dam/repositories/task_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:dam/pages/tasks_page.dart';
 
+import 'models/category/category_controller.dart';
+
 
 late ObjectBox objectbox;
 
@@ -12,6 +14,9 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   objectbox = await ObjectBox.create();
+
+
+
 
 
   runApp(const MyApp());
@@ -29,7 +34,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlue),
       ),
       //home: TasksPage(taskRepository: TaskRepository(objectbox),),
-      home: TasksPage2(categoryRepository: CategoryRepository(objectbox),),
+      home: TasksPage2(categoryController: CategoryController(CategoryRepository(objectbox))),
     );
   }
 }
