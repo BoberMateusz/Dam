@@ -36,6 +36,13 @@ class _CategoryWidgetState extends State<CategoryWidget> {
     );
   }
 
+  void deleteCategory(Category category) {
+    widget.categoryController.deleteCategory(category);
+    setState(() {
+      widget.categoryController.categories;
+    });
+  }
+
 
 
   @override
@@ -53,19 +60,16 @@ class _CategoryWidgetState extends State<CategoryWidget> {
 
 
 
-
-
-
           //  IconButton(
           //   icon: const Icon(Icons.edit),
           //   onPressed: () {},
           //   tooltip: 'Edit Category',
           // ),
-          //  IconButton(
-          //   icon: const Icon(Icons.delete),
-          //   onPressed: () {},
-          //   tooltip: 'Delete Category',
-          // ),
+           IconButton(
+            icon: const Icon(Icons.delete),
+            onPressed: () => deleteCategory(widget.category),
+            tooltip: 'Delete Category',
+          ),
 
 
         ],

@@ -16,6 +16,12 @@ class CategoryController {
     categoryRepository.add(category);
   }
 
+  void deleteCategory(Category category) {
+    categories.remove(category);
+    categoryRepository.delete(category.id);
+    //todo: delete tasks
+  }
+
   void createTaskOnPressed(text) {
     Task task = Task(name: text);
     //task.category.target = this;

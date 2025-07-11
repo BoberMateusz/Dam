@@ -21,39 +21,13 @@ class TasksPage2 extends StatefulWidget {
 }
 
 class _TasksPage2State extends State<TasksPage2> {
-    late List<Category> categories = widget.categoryController.categories;
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _loadCategories();
-  // }
-  //
-  // void _loadCategories() {
-  //   setState(() {
-  //     categories;
-  //   });
-  // }
-
-  void deleteCategory(Category category) {
+  void createOnPressed(String text) {
+    widget.categoryController.createCategoryOnPressed(text);
     setState(() {
-      categories.remove(category);
-      //todo: delete cat from db
-      //todo: delete tasks
+      widget.categoryController.categories;
     });
   }
-
-
-
-
-  void resetState() {
-    setState(() {
-      categories;
-    });
-  }
-
-
-
 
   void createNewCategory() {
     showDialog(
@@ -61,12 +35,14 @@ class _TasksPage2State extends State<TasksPage2> {
       builder: (context) {
         return DialogBox(
           controller: TextEditingController(),
-          onPressed: widget.categoryController.createCategoryOnPressed, //todo:change to list, add resetState
+          onPressed: createOnPressed,
           hintText: "Create a Category",
         );
       },
     );
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +57,7 @@ class _TasksPage2State extends State<TasksPage2> {
         ),
         body: ListView.builder(
           scrollDirection: Axis.vertical,
-          itemBuilder: (context, index) => CategoryWidget(category: categories[index], categoryController: widget.categoryController) , itemCount: categories.length,
+          itemBuilder: (context, index) => CategoryWidget(category: widget.categoryController.categories[index], categoryController: widget.categoryController) , itemCount: widget.categoryController.categories.length,
 
 
         )
