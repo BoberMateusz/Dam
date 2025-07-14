@@ -7,7 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'data/database/objectbox.dart';
 import 'data/repositories/category_repository.dart';
-import 'domain/category/category_controller.dart';
+import 'domain/category/category_notifier.dart';
 
 
 
@@ -38,7 +38,7 @@ class MyApp extends ConsumerWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlue),
       ),
       //home: TasksPage(taskRepository: TaskRepository(objectbox),),
-      home: TasksPage2(categoryController: CategoryController(CategoryRepository(objectbox))),
+      home: TasksPage2(categoryController: CategoryNotifier(CategoryRepository(objectbox))),
     );
   }
 }

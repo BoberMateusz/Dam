@@ -1,9 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:objectbox/objectbox.dart';
 
 import 'task_model.dart';
 
 @Entity()
-class Category {
+class Category extends ChangeNotifier {
   @Id()
   int id = 0;
   String name;

@@ -1,14 +1,14 @@
 
 import 'package:flutter/material.dart';
 
-import '../../domain/category/category_controller.dart';
+import '../../domain/category/category_notifier.dart';
 import '../widgets/category_widget.dart';
 import '../widgets/dialog_box.dart';
 
 
 
 class TasksPage2 extends StatefulWidget {
-  final CategoryController categoryController;
+  final CategoryNotifier categoryController;
 
   const TasksPage2({
     super.key,

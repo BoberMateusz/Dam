@@ -2,13 +2,13 @@
 import 'package:flutter/material.dart';
 
 import '../../data/models/category_model.dart';
-import '../../domain/category/category_controller.dart';
+import '../../domain/category/category_notifier.dart';
 import 'dialog_box.dart';
 
 
 
 class CategoryWidget extends StatefulWidget {
-  final CategoryController categoryController;
+  final CategoryNotifier categoryController;
   final Category category;
 
   const CategoryWidget({

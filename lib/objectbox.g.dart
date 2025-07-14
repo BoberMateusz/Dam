@@ -14,26 +14,26 @@ import 'package:objectbox/internal.dart'
 import 'package:objectbox/objectbox.dart' as obx;
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
-import '../models/category_model.dart';
-import '../models/task_model.dart';
+import 'data/models/category_model.dart';
+import 'data/models/task_model.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
 final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
-    id: const obx_int.IdUid(1, 3877910336263580739),
+    id: const obx_int.IdUid(1, 388254655335035540),
     name: 'Category',
-    lastPropertyId: const obx_int.IdUid(2, 4330244206181289004),
+    lastPropertyId: const obx_int.IdUid(2, 5430558744472453095),
     flags: 0,
     properties: <obx_int.ModelProperty>[
       obx_int.ModelProperty(
-        id: const obx_int.IdUid(1, 2167732647011136843),
+        id: const obx_int.IdUid(1, 1032275881502681220),
         name: 'id',
         type: 6,
         flags: 1,
       ),
       obx_int.ModelProperty(
-        id: const obx_int.IdUid(2, 4330244206181289004),
+        id: const obx_int.IdUid(2, 5430558744472453095),
         name: 'name',
         type: 9,
         flags: 0,
@@ -49,35 +49,35 @@ final _entities = <obx_int.ModelEntity>[
     ],
   ),
   obx_int.ModelEntity(
-    id: const obx_int.IdUid(2, 7811598062466525724),
+    id: const obx_int.IdUid(2, 6604421879822015114),
     name: 'Task',
-    lastPropertyId: const obx_int.IdUid(4, 4817216017562033795),
+    lastPropertyId: const obx_int.IdUid(4, 9184246253789654006),
     flags: 0,
     properties: <obx_int.ModelProperty>[
       obx_int.ModelProperty(
-        id: const obx_int.IdUid(1, 8975382293945278690),
+        id: const obx_int.IdUid(1, 5442947408693192041),
         name: 'id',
         type: 6,
         flags: 1,
       ),
       obx_int.ModelProperty(
-        id: const obx_int.IdUid(2, 7224006901286405785),
+        id: const obx_int.IdUid(2, 3443296675829601581),
         name: 'name',
         type: 9,
         flags: 0,
       ),
       obx_int.ModelProperty(
-        id: const obx_int.IdUid(3, 4450407076287529573),
+        id: const obx_int.IdUid(3, 1456904457217467199),
         name: 'isCompleted',
         type: 1,
         flags: 0,
       ),
       obx_int.ModelProperty(
-        id: const obx_int.IdUid(4, 4817216017562033795),
+        id: const obx_int.IdUid(4, 9184246253789654006),
         name: 'categoryId',
         type: 11,
         flags: 520,
-        indexId: const obx_int.IdUid(1, 8711876252814931912),
+        indexId: const obx_int.IdUid(1, 8809101644260965154),
         relationTarget: 'Category',
       ),
     ],
@@ -124,8 +124,8 @@ Future<obx.Store> openStore({
 obx_int.ModelDefinition getObjectBoxModel() {
   final model = obx_int.ModelInfo(
     entities: _entities,
-    lastEntityId: const obx_int.IdUid(2, 7811598062466525724),
-    lastIndexId: const obx_int.IdUid(1, 8711876252814931912),
+    lastEntityId: const obx_int.IdUid(2, 6604421879822015114),
+    lastIndexId: const obx_int.IdUid(1, 8809101644260965154),
     lastRelationId: const obx_int.IdUid(0, 0),
     lastSequenceId: const obx_int.IdUid(0, 0),
     retiredEntityUids: const [],
