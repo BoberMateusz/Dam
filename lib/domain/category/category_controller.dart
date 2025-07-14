@@ -1,7 +1,9 @@
-import 'package:dam/models/category/category_model.dart';
 
-import '../../repositories/category_repository.dart';
-import '../task/task_model.dart';
+
+import '../../data/models/category_model.dart';
+import '../../data/models/task_model.dart';
+import '../../data/repositories/category_repository.dart';
+
 
 class CategoryController {
   final CategoryRepository categoryRepository;

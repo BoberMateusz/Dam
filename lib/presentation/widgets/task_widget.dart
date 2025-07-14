@@ -1,9 +1,12 @@
 import 'package:dam/main.dart';
-import 'package:dam/models/task/task_model.dart';
+
 import 'package:flutter/material.dart';
 
-import '../../repositories/task_repository.dart';
-import '../../util/dialog_box.dart';
+import '../../data/models/task_model.dart';
+import '../../data/repositories/task_repository.dart';
+import 'dialog_box.dart';
+
+
 
 
 class TaskWidget extends StatefulWidget {

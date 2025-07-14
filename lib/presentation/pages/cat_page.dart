@@ -1,12 +1,11 @@
 
-
-import 'package:dam/models/category/category_controller.dart';
-import 'package:dam/models/category/category_widget.dart';
-import 'package:dam/repositories/category_repository.dart';
-import 'package:dam/util/dialog_box.dart';
 import 'package:flutter/material.dart';
 
-import '../models/category/category_model.dart';
+import '../../domain/category/category_controller.dart';
+import '../widgets/category_widget.dart';
+import '../widgets/dialog_box.dart';
+
+
 
 class TasksPage2 extends StatefulWidget {
   final CategoryController categoryController;

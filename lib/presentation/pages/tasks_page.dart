@@ -1,11 +1,11 @@
 
-
-import 'package:dam/util/dialog_box.dart';
 import 'package:flutter/material.dart';
 
-import '../models/task/task_model.dart';
-import '../models/task/task_widget.dart';
-import '../repositories/task_repository.dart';
+import '../../data/models/task_model.dart';
+import '../../data/repositories/task_repository.dart';
+import '../widgets/dialog_box.dart';
+import '../widgets/task_widget.dart';
+
 
 class TasksPage extends StatefulWidget {
   final TaskRepository taskRepository;

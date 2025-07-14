@@ -1,8 +1,11 @@
-import 'package:dam/models/category/category_controller.dart';
-import 'package:dam/models/category/category_model.dart';
+
 import 'package:flutter/material.dart';
 
-import '../../util/dialog_box.dart';
+import '../../data/models/category_model.dart';
+import '../../domain/category/category_controller.dart';
+import 'dialog_box.dart';
+
+
 
 class CategoryWidget extends StatefulWidget {
   final CategoryController categoryController;
