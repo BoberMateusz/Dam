@@ -3,19 +3,18 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../data/models/category_model.dart';
 import '../../data/models/task_model.dart';
 import '../../data/repositories/category_repository.dart';
+import '../../main.dart';
 
 part 'category_notifier.g.dart';
 
 @Riverpod(keepAlive: true)
 class CategoryNotifier extends _$CategoryNotifier {
-  late final CategoryRepository categoryRepository;
-
-
+   final CategoryRepository categoryRepository = CategoryRepository(objectbox); //todo: create repo provider
 
 
   @override
   List<Category> build() {
-    return List<Category>.empty();
+    return fetchCategories();
   }
 
 
@@ -27,6 +26,7 @@ class CategoryNotifier extends _$CategoryNotifier {
     Category category = Category(name: text);
     state = [...state, category];
     categoryRepository.add(category);
+
   }
 
   void deleteCategory(Category category) { //todo: later

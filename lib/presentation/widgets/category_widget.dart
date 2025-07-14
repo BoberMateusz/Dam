@@ -8,12 +8,10 @@ import 'dialog_box.dart';
 
 
 class CategoryWidget extends StatefulWidget {
-  final CategoryNotifier categoryController;
   final Category category;
 
   const CategoryWidget({
     super.key,
-    required this.categoryController,
     required this.category
   });
 
@@ -26,25 +24,25 @@ class _CategoryWidgetState extends State<CategoryWidget> {
 
 
 
-  void createNewTask() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return DialogBox(
-          controller: TextEditingController(),
-          onPressed: widget.categoryController.createTaskOnPressed,
-          hintText: "Create a Task",
-        );
-      },
-    );
-  }
+  // void createNewTask() { todo: later
+  //   showDialog(
+  //     context: context,
+  //     builder: (context) {
+  //       return DialogBox(
+  //         controller: TextEditingController(),
+  //         onPressed: widget.categoryController.createTaskOnPressed,
+  //         hintText: "Create a Task",
+  //       );
+  //     },
+  //   );
+  // }
 
-  void deleteCategory(Category category) {
-    widget.categoryController.deleteCategory(category);
-    setState(() {
-      widget.categoryController.categories;
-    });
-  }
+  // void deleteCategory(Category category) {
+  //   widget.categoryController.deleteCategory(category);
+  //   setState(() {
+  //     widget.categoryController.categories;
+  //   });
+  // }
 
 
 
@@ -68,11 +66,12 @@ class _CategoryWidgetState extends State<CategoryWidget> {
           //   onPressed: () {},
           //   tooltip: 'Edit Category',
           // ),
-           IconButton(
-            icon: const Icon(Icons.delete),
-            onPressed: () => deleteCategory(widget.category),
-            tooltip: 'Delete Category',
-          ),
+
+          //  IconButton( //todo: later1
+          //   icon: const Icon(Icons.delete),
+          //   onPressed: () => deleteCategory(widget.category),
+          //   tooltip: 'Delete Category',
+          // ),
 
 
         ],

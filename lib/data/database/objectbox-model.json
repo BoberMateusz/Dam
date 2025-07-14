@@ -4,18 +4,18 @@
   "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
   "entities": [
     {
-      "id": "1:2189447671490726969",
-      "lastPropertyId": "2:1118779711945786860",
+      "id": "1:6521932338988524833",
+      "lastPropertyId": "2:293849971414900280",
       "name": "Category",
       "properties": [
         {
-          "id": "1:3856293409112643037",
+          "id": "1:7572349540770649060",
           "name": "id",
           "type": 6,
           "flags": 1
         },
         {
-          "id": "2:1118779711945786860",
+          "id": "2:293849971414900280",
           "name": "name",
           "type": 9
         }
@@ -23,40 +23,40 @@
       "relations": []
     },
     {
-      "id": "2:1012309561863622508",
-      "lastPropertyId": "4:3127667308169683394",
+      "id": "2:3487452886931215748",
+      "lastPropertyId": "4:3942541247262274046",
       "name": "Task",
       "properties": [
         {
-          "id": "1:4814699461518510483",
+          "id": "1:4604617156926317800",
           "name": "id",
           "type": 6,
           "flags": 1
         },
         {
-          "id": "2:448653373904109191",
+          "id": "2:4202843330919661902",
           "name": "name",
           "type": 9
         },
         {
-          "id": "3:3008513323311580127",
+          "id": "3:3425352689475673884",
           "name": "isCompleted",
           "type": 1
         },
         {
-          "id": "4:3127667308169683394",
+          "id": "4:3942541247262274046",
           "name": "categoryId",
           "type": 11,
           "flags": 520,
-          "indexId": "1:3716094354217942722",
+          "indexId": "1:1761351289487241855",
           "relationTarget": "Category"
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "2:1012309561863622508",
-  "lastIndexId": "1:3716094354217942722",
+  "lastEntityId": "2:3487452886931215748",
+  "lastIndexId": "1:1761351289487241855",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,

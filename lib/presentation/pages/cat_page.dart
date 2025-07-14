@@ -1,40 +1,33 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../data/models/category_model.dart';
 import '../../domain/category/category_notifier.dart';
 import '../widgets/category_widget.dart';
 import '../widgets/dialog_box.dart';
 
 
 
-class TasksPage2 extends StatefulWidget {
-  final CategoryNotifier categoryController;
+class TasksPage2 extends ConsumerWidget {
 
   const TasksPage2({
     super.key,
-    required this.categoryController
   });
 
-  @override
-  State<TasksPage2> createState() => _TasksPage2State();
-}
 
-class _TasksPage2State extends State<TasksPage2> {
 
-  void createOnPressed(String text) {
-    widget.categoryController.createCategoryOnPressed(text);
-    setState(() {
-      widget.categoryController.categories;
-    });
-  }
 
-  void createNewCategory() {
+
+
+
+  void _createNewCategory(BuildContext context, WidgetRef ref) {
     showDialog(
       context: context,
       builder: (context) {
         return DialogBox(
           controller: TextEditingController(),
-          onPressed: createOnPressed,
+          onPressed: ref.read(categoryNotifierProvider.notifier).addCategory,
           hintText: "Create a Category",
         );
       },
@@ -44,22 +37,27 @@ class _TasksPage2State extends State<TasksPage2> {
 
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final List<Category> categories = ref.watch(categoryNotifierProvider);
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).primaryColor,
           title: Text("Tasks"),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: createNewCategory,
+          onPressed: () => _createNewCategory(context, ref),
           child: Icon(Icons.add),
         ),
         body: ListView.builder(
           scrollDirection: Axis.vertical,
-          itemBuilder: (context, index) => CategoryWidget(category: widget.categoryController.categories[index], categoryController: widget.categoryController) , itemCount: widget.categoryController.categories.length,
+          itemBuilder: (context, index) =>
+          CategoryWidget(category: categories[index]),
+          itemCount: categories.length,
 
 
         )
     );
   }
 }
+
+

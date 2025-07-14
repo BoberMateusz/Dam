@@ -14,7 +14,7 @@ import 'domain/category/category_notifier.dart';
 
 late ObjectBox objectbox;
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   objectbox = await ObjectBox.create();
@@ -38,11 +38,11 @@ class MyApp extends ConsumerWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlue),
       ),
       //home: TasksPage(taskRepository: TaskRepository(objectbox),),
-      home: TasksPage2(categoryController: CategoryNotifier(CategoryRepository(objectbox))),
+      home: TasksPage2(),
     );
   }
 }
 
-//flutter pub run build_runner build --delete-conflicting-outputs
+//dart run build_runner watch -d
 
 
