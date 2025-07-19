@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/models/category_model.dart';
-import '../../domain/category/category_notifier.dart';
+import '../../domain/notifiers/category_notifier.dart';
 import '../widgets/category_widget.dart';
 import '../widgets/dialog_box.dart';
 

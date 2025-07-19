@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 import '../../data/models/category_model.dart';
-import '../../domain/category/category_notifier.dart';
+import '../../domain/notifiers/category_notifier.dart';
 import 'dialog_box.dart';
 
 

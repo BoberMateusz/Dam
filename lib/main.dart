@@ -7,7 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'data/database/objectbox.dart';
 import 'data/repositories/category_repository.dart';
-import 'domain/category/category_notifier.dart';
+import 'domain/notifiers/category_notifier.dart';
 
 
 

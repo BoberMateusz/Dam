@@ -11,7 +11,7 @@ import 'dialog_box.dart';
 
 class TaskWidget extends StatefulWidget {
   final Task task;
-  final Function(Task task) deleteFromList;
+  final Function(Task task) deleteFromList; //todo:bruh
 
   const TaskWidget({
     super.key,

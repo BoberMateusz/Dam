@@ -14,10 +14,8 @@ import 'package:objectbox/internal.dart'
 import 'package:objectbox/objectbox.dart' as obx;
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
-import '../models/category_model.dart';
-import '../models/task_model.dart';
-
-
+import 'data/models/category_model.dart';
+import 'data/models/task_model.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
