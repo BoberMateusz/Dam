@@ -9,9 +9,9 @@ import '../widgets/dialog_box.dart';
 
 
 
-class TasksPage2 extends ConsumerWidget {
+class TasksPage extends ConsumerWidget {
 
-  const TasksPage2({
+  const TasksPage({
     super.key,
   });
 

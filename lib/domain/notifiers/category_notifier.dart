@@ -1,7 +1,6 @@
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../data/models/category_model.dart';
-import '../../data/models/task_model.dart';
 import '../../data/repositories/category_repository.dart';
 import '../../main.dart';
 
@@ -31,7 +30,7 @@ class CategoryNotifier extends _$CategoryNotifier {
 
   void deleteCategory(Category category) { //todo: later
     categoryRepository.delete(category.id);
-    //todo: delete tasks
+    state = state.where((element) => element.id != category.id).toList();
   }
 
   // void createTaskOnPressed(text) {

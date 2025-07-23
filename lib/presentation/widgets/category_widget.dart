@@ -1,13 +1,13 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/models/category_model.dart';
 import '../../domain/notifiers/category_notifier.dart';
-import 'dialog_box.dart';
 
 
 
-class CategoryWidget extends StatefulWidget {
+class CategoryWidget extends ConsumerWidget {
   final Category category;
 
   const CategoryWidget({
@@ -16,44 +16,13 @@ class CategoryWidget extends StatefulWidget {
   });
 
   @override
-  State<CategoryWidget> createState() => _CategoryWidgetState();
-}
-
-class _CategoryWidgetState extends State<CategoryWidget> {
-
-
-
-
-  // void createNewTask() { todo: later
-  //   showDialog(
-  //     context: context,
-  //     builder: (context) {
-  //       return DialogBox(
-  //         controller: TextEditingController(),
-  //         onPressed: widget.categoryController.createTaskOnPressed,
-  //         hintText: "Create a Task",
-  //       );
-  //     },
-  //   );
-  // }
-
-  // void deleteCategory(Category category) {
-  //   widget.categoryController.deleteCategory(category);
-  //   setState(() {
-  //     widget.categoryController.categories;
-  //   });
-  // }
-
-
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Card(
       color: Theme.of(context).secondaryHeaderColor,
       child: Row(
         children: [
-          Expanded(child: Text(widget.category.name)),
-           IconButton(
+          Expanded(child: Text(category.name)),
+          IconButton(
             icon: const Icon(Icons.add),
             onPressed: () {},
             tooltip: 'Add Task',
@@ -67,11 +36,11 @@ class _CategoryWidgetState extends State<CategoryWidget> {
           //   tooltip: 'Edit Category',
           // ),
 
-          //  IconButton( //todo: later1
-          //   icon: const Icon(Icons.delete),
-          //   onPressed: () => deleteCategory(widget.category),
-          //   tooltip: 'Delete Category',
-          // ),
+          IconButton(
+            icon: const Icon(Icons.delete),
+            onPressed: () => ref.read(categoryNotifierProvider.notifier).deleteCategory(category),
+            tooltip: 'Delete Category',
+          ),
 
 
         ],
@@ -79,3 +48,5 @@ class _CategoryWidgetState extends State<CategoryWidget> {
     );
   }
 }
+
+

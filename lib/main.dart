@@ -2,12 +2,9 @@
 import 'package:dam/presentation/pages/cat_page.dart';
 
 import 'package:flutter/material.dart';
-import 'package:dam/presentation/pages/tasks_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'data/database/objectbox.dart';
-import 'data/repositories/category_repository.dart';
-import 'domain/notifiers/category_notifier.dart';
 
 
 
@@ -38,7 +35,7 @@ class MyApp extends ConsumerWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlue),
       ),
       //home: TasksPage(taskRepository: TaskRepository(objectbox),),
-      home: TasksPage2(),
+      home: TasksPage(),
     );
   }
 }
