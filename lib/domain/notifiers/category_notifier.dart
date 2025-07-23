@@ -25,7 +25,12 @@ class CategoryNotifier extends _$CategoryNotifier {
     Category category = Category(name: text);
     state = [...state, category];
     categoryRepository.add(category);
+  }
 
+  void editCategory(Category category, String text) {
+    category.name = text;
+    categoryRepository.update(category);
+    state = state.map((e) => e.id == category.id ? category : e).toList();
   }
 
   void deleteCategory(Category category) { //todo: later

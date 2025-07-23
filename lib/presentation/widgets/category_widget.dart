@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/models/category_model.dart';
 import '../../domain/notifiers/category_notifier.dart';
+import 'dialog_box.dart';
 
 
 
@@ -15,6 +16,20 @@ class CategoryWidget extends ConsumerWidget {
     required this.category
   });
 
+
+  void _editCategory(BuildContext context, WidgetRef ref) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return DialogBox(
+          controller: TextEditingController(text: category.name),
+          onPressed: (text) => ref.read(categoryNotifierProvider.notifier).editCategory(category, text), //zmien text w cat
+          hintText: "Edit Category",
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Card(
@@ -22,6 +37,7 @@ class CategoryWidget extends ConsumerWidget {
       child: Row(
         children: [
           Expanded(child: Text(category.name)),
+
           IconButton(
             icon: const Icon(Icons.add),
             onPressed: () {},
@@ -30,11 +46,11 @@ class CategoryWidget extends ConsumerWidget {
 
 
 
-          //  IconButton(
-          //   icon: const Icon(Icons.edit),
-          //   onPressed: () {},
-          //   tooltip: 'Edit Category',
-          // ),
+           IconButton(
+            icon: const Icon(Icons.edit),
+            onPressed: () => _editCategory(context, ref),
+            tooltip: 'Edit Category',
+          ),
 
           IconButton(
             icon: const Icon(Icons.delete),
