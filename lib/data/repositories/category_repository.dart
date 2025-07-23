@@ -1,6 +1,7 @@
-import 'package:dam/models/category/category_model.dart';
+
 import 'package:objectbox/objectbox.dart';
 import '../database/objectbox.dart';
+import '../models/category_model.dart';
 import 'dao.dart';
 
 

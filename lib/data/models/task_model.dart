@@ -1,5 +1,7 @@
-import 'package:dam/models/category/category_model.dart';
+
 import 'package:objectbox/objectbox.dart';
+
+import 'category_model.dart';
 
 @Entity()
 class Task {

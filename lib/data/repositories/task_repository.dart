@@ -1,6 +1,7 @@
-import 'package:dam/models/task/task_model.dart';
+
 import 'package:objectbox/objectbox.dart';
 import '../database/objectbox.dart';
+import '../models/task_model.dart';
 import 'dao.dart';
 
 
