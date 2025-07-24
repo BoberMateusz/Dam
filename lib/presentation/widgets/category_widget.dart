@@ -1,10 +1,11 @@
 
+import 'package:dam/presentation/widgets/task_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/models/category_model.dart';
+import '../../data/models/task_model.dart';
 import '../../domain/notifiers/category_notifier.dart';
-import '../../domain/notifiers/task_notifier.dart';
 import 'dialog_box.dart';
 
 
@@ -24,7 +25,7 @@ class CategoryWidget extends ConsumerWidget {
       builder: (context) {
         return DialogBox(
           controller: TextEditingController(),
-          onPressed: (text) => ref.read(taskNotifierProvider.notifier).addTask(text), //todo: how should tasks be connected to categories? why task_repo?
+          onPressed: (text) => ref.read(categoryNotifierProvider.notifier).addTask(category, Task(name: text)),
           hintText: "Add Task",
         );
       },
@@ -38,7 +39,7 @@ class CategoryWidget extends ConsumerWidget {
       builder: (context) {
         return DialogBox(
           controller: TextEditingController(text: category.name),
-          onPressed: (text) => ref.read(categoryNotifierProvider.notifier).editCategory(category, text),
+          onPressed: (text) => ref.read(categoryNotifierProvider.notifier).editCategoryName(category, text),
           hintText: "Edit Category",
         );
       },
@@ -47,18 +48,11 @@ class CategoryWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Card(
-      color: Theme.of(context).secondaryHeaderColor,
-      child: Row(
+    return ExpansionTile(
+      backgroundColor: Theme.of(context).secondaryHeaderColor,
+      title: Row(
         children: [
           Expanded(child: Text(category.name)),
-
-
-          IconButton(
-            icon: const Icon(Icons.arrow_drop_down),
-            onPressed: () => _addTask(context, ref),
-            tooltip: 'Add Task',
-          ),
 
           IconButton(
             icon: const Icon(Icons.add),
@@ -80,11 +74,21 @@ class CategoryWidget extends ConsumerWidget {
             tooltip: 'Delete Category',
           ),
 
-
         ],
+      ),
+      children: List.generate(
+        category.tasks.length,
+        (index) => TaskWidget(task: category.tasks[index]),
       ),
     );
   }
 }
 
+
+//ListView.builder(
+//           scrollDirection: Axis.vertical,
+//           itemBuilder: (context, index) =>
+//               TaskWidget(task: category.tasks[index]),
+//           itemCount: category.tasks.length,
+//         ),
 

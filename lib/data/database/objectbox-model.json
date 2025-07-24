@@ -4,18 +4,18 @@
   "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
   "entities": [
     {
-      "id": "1:1008259779260114945",
-      "lastPropertyId": "2:2808633378337115644",
+      "id": "1:7404082103151403379",
+      "lastPropertyId": "2:2159848837705044495",
       "name": "Category",
       "properties": [
         {
-          "id": "1:1019386816257875312",
+          "id": "1:7853116368869975342",
           "name": "id",
           "type": 6,
           "flags": 1
         },
         {
-          "id": "2:2808633378337115644",
+          "id": "2:2159848837705044495",
           "name": "name",
           "type": 9
         }
@@ -23,40 +23,40 @@
       "relations": []
     },
     {
-      "id": "2:5470357807764043975",
-      "lastPropertyId": "4:4561556014586439351",
+      "id": "2:6018176592653360098",
+      "lastPropertyId": "4:3789517647740367845",
       "name": "Task",
       "properties": [
         {
-          "id": "1:3754981017917978279",
+          "id": "1:5756443490393141096",
           "name": "id",
           "type": 6,
           "flags": 1
         },
         {
-          "id": "2:7625055720454843687",
+          "id": "2:2501553379604431890",
           "name": "name",
           "type": 9
         },
         {
-          "id": "3:6930450010367594583",
+          "id": "3:2085944507752532026",
           "name": "isCompleted",
           "type": 1
         },
         {
-          "id": "4:4561556014586439351",
+          "id": "4:3789517647740367845",
           "name": "categoryId",
           "type": 11,
           "flags": 520,
-          "indexId": "1:5506545453093020527",
+          "indexId": "1:2534229154779784291",
           "relationTarget": "Category"
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "2:5470357807764043975",
-  "lastIndexId": "1:5506545453093020527",
+  "lastEntityId": "2:6018176592653360098",
+  "lastIndexId": "1:2534229154779784291",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,

@@ -1,10 +1,11 @@
 
+import 'package:dam/data/models/category_model.dart';
 import 'package:dam/data/models/task_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
-import '../../domain/notifiers/task_notifier.dart';
+import '../../domain/notifiers/category_notifier.dart';
 import 'dialog_box.dart';
 
 
@@ -24,7 +25,7 @@ class TaskWidget extends ConsumerWidget {
       builder: (context) {
         return DialogBox(
           controller: TextEditingController(text: task.name),
-          onPressed: (text) => ref.read(taskNotifierProvider.notifier).editTask(task, text),
+          onPressed: (text) => ref.read(categoryNotifierProvider.notifier).editTask(task.category as Category, task, text),
           hintText: "Edit Task",
         );
       },
@@ -54,7 +55,7 @@ class TaskWidget extends ConsumerWidget {
 
           IconButton(
             icon: const Icon(Icons.delete),
-            onPressed: () => ref.read(taskNotifierProvider.notifier).deleteTask(task),
+            onPressed: () => ref.read(categoryNotifierProvider.notifier).deleteTask(task.category as Category, task),
             tooltip: 'Delete Task',
           ),
 

@@ -1,6 +1,7 @@
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../data/models/category_model.dart';
+import '../../data/models/task_model.dart';
 import '../../data/repositories/category_repository.dart';
 import '../../main.dart';
 
@@ -27,7 +28,7 @@ class CategoryNotifier extends _$CategoryNotifier {
     categoryRepository.add(category);
   }
 
-  void editCategory(Category category, String text) {
+  void editCategoryName(Category category, String text) {
     category.name = text;
     categoryRepository.update(category);
     state = state.map((e) => e.id == category.id ? category : e).toList();
@@ -37,6 +38,29 @@ class CategoryNotifier extends _$CategoryNotifier {
     categoryRepository.delete(category.id);
     state = state.where((element) => element.id != category.id).toList();
   }
+
+
+//Tasks
+   void addTask(Category category, Task task) {
+     category.tasks.add(task);
+     categoryRepository.update(category);
+     state = state.map((e) => e.id == category.id ? category : e).toList();
+   }
+
+   void editTask(Category category, Task task, String text) {
+     task.name = text;
+     categoryRepository.update(category);
+     state = state.map((e) => e.id == category.id ? category : e).toList();
+   }
+
+   void deleteTask(Category category, Task task) {
+     category.tasks.remove(task);
+     categoryRepository.update(category);
+     state = state.map((e) => e.id == category.id ? category : e).toList();
+   }
+
+
+
 
   // void createTaskOnPressed(text) {
   //   Task task = Task(name: text);

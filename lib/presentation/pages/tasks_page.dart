@@ -22,7 +22,7 @@ class TasksPage extends ConsumerWidget {
       builder: (context) {
         return DialogBox(
           controller: TextEditingController(),
-          onPressed: ref.read(categoryNotifierProvider.notifier).addCategory,
+          onPressed: (text) => ref.read(categoryNotifierProvider.notifier).addCategory(text),
           hintText: "Create a Category",
         );
       },
@@ -43,14 +43,14 @@ class TasksPage extends ConsumerWidget {
           onPressed: () => _createNewCategory(context, ref),
           child: Icon(Icons.add),
         ),
-        body: ListView.builder(
+        body: categories.isNotEmpty ?
+        ListView.builder(
           scrollDirection: Axis.vertical,
           itemBuilder: (context, index) =>
-          CategoryWidget(category: categories[index]),
+              CategoryWidget(category: categories[index]),
           itemCount: categories.length,
-
-
-        )
+        ) :
+            Text("No Categories"), //todo: prettify this
     );
   }
 }
