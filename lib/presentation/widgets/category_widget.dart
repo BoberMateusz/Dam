@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/models/category_model.dart';
 import '../../domain/notifiers/category_notifier.dart';
+import '../../domain/notifiers/task_notifier.dart';
 import 'dialog_box.dart';
 
 
@@ -17,13 +18,27 @@ class CategoryWidget extends ConsumerWidget {
   });
 
 
+  void _addTask(BuildContext context, WidgetRef ref) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return DialogBox(
+          controller: TextEditingController(),
+          onPressed: (text) => ref.read(taskNotifierProvider.notifier).addTask(text), //todo: how should tasks be connected to categories? why task_repo?
+          hintText: "Add Task",
+        );
+      },
+    );
+  }
+
+
   void _editCategory(BuildContext context, WidgetRef ref) {
     showDialog(
       context: context,
       builder: (context) {
         return DialogBox(
           controller: TextEditingController(text: category.name),
-          onPressed: (text) => ref.read(categoryNotifierProvider.notifier).editCategory(category, text), //zmien text w cat
+          onPressed: (text) => ref.read(categoryNotifierProvider.notifier).editCategory(category, text),
           hintText: "Edit Category",
         );
       },
@@ -38,9 +53,16 @@ class CategoryWidget extends ConsumerWidget {
         children: [
           Expanded(child: Text(category.name)),
 
+
+          IconButton(
+            icon: const Icon(Icons.arrow_drop_down),
+            onPressed: () => _addTask(context, ref),
+            tooltip: 'Add Task',
+          ),
+
           IconButton(
             icon: const Icon(Icons.add),
-            onPressed: () {},
+            onPressed: () => _addTask(context, ref),
             tooltip: 'Add Task',
           ),
 

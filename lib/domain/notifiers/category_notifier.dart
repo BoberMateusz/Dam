@@ -33,7 +33,7 @@ class CategoryNotifier extends _$CategoryNotifier {
     state = state.map((e) => e.id == category.id ? category : e).toList();
   }
 
-  void deleteCategory(Category category) { //todo: later
+  void deleteCategory(Category category) {
     categoryRepository.delete(category.id);
     state = state.where((element) => element.id != category.id).toList();
   }

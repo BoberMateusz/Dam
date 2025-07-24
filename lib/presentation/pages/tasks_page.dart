@@ -16,11 +16,6 @@ class TasksPage extends ConsumerWidget {
   });
 
 
-
-
-
-
-
   void _createNewCategory(BuildContext context, WidgetRef ref) {
     showDialog(
       context: context,

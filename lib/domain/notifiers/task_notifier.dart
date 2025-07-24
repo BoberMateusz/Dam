@@ -25,13 +25,18 @@ class TaskNotifier extends _$TaskNotifier {
     Task task = Task(name: text);
     state = [...state, task];
     taskRepository.add(task);
-
   }
 
-  void deleteTask(Task task) { //todo: later
-    taskRepository.delete(task.id);
+   void editTask(Task task, String text) {
+     task.name = text;
+     taskRepository.update(task);
+     state = state.map((e) => e.id == task.id ? task : e).toList();
+   }
 
-  }
+   void deleteTask(Task task) {
+     taskRepository.delete(task.id);
+     state = state.where((element) => element.id != task.id).toList();
+   }
 
   // void createTaskOnPressed(text) {
   //   Task task = Task(name: text);
